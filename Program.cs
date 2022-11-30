@@ -1,6 +1,6 @@
 ﻿namespace MooGame
 {
-    class MainClass
+    public class MainClass
     {
         public static void Main(string[] args)
         {
@@ -11,7 +11,7 @@
 
             while (playOn)
             {
-                string goal = makeGoal();
+                string goal = CreateSecretSequence();
 
 
                 Console.WriteLine("New game:\n");
@@ -42,22 +42,21 @@
                 }
             }
         }
-        static string makeGoal()
+        public static string CreateSecretSequence()
         {
-            Random randomGenerator = new Random();
-            string goal = "";
+            string secretSequence = "";
+            Random NumberGenerator = new();
+            int random;
             for (int i = 0; i < 4; i++)
             {
-                int random = randomGenerator.Next(10);
-                string randomDigit = "" + random;
-                while (goal.Contains(randomDigit))
+                do
                 {
-                    random = randomGenerator.Next(10);
-                    randomDigit = "" + random;
+                    random = NumberGenerator.Next(10);
                 }
-                goal = goal + randomDigit;
+                while (secretSequence.Contains(random.ToString()));
+                secretSequence += random;
             }
-            return goal;
+            return secretSequence;
         }
 
         static string checkBC(string goal, string guess)
